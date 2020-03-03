@@ -1,0 +1,26 @@
+#Image_training - mnist
+
+import sys, os 
+sys.path.append(os.pardir)
+import numpy as np
+from dataset.mnist import load_mnist  #데이터 셋mnist.py 에서 load_mnist 함수를 데이터셋으로 데이터셋 읽기
+from PIL import Image
+
+def img_show(img):                             #28*28 이미지 받은거
+    pil_img=Image.fromarray(np.uint8(img))     #넘파이로 저장된 이미지 데이터를 PIL용 데이터 객체로 변환
+    pil_img.show()         #이미지를 보여줘
+    
+(x_train,t_train),(x_test,t_test)=\
+load_mnist(flatten=True, normalize=False) #훈련이미지 레이블, 시험이미지 레이블을 1차원 배열로 하고, 이미지 픽셀값은 0~255
+
+img=x_train[2]  #img 변수에 훈련이미지 3번째것을 저장
+label=t_train[2] #레이블에 훈련레이블1번쨰것을 저장 
+print(label) 
+
+print(img.shape) # 이미지의 형태
+img=img.reshape(28,28) #이미지 형태 28*28형태로 다시 바꿈
+print(img.shape) #형태
+
+img_show(img) #함수로 보내보리기
+
+
