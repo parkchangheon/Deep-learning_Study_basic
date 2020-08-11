@@ -1,0 +1,36 @@
+#CNN
+#im2col
+
+import sys,os
+sys.path.append(os.pardir)
+from common.util import im2col
+
+class convolution:
+    def __init__(self,w,b,stride=1,pad=0):
+        self.w=w
+        self.b=b
+        self.stride=stride
+        self.pad=pad
+        
+    def forward(self,x):
+        fn,c,fh,fw=self.w.shape
+        n,c,h,w=x.shape
+        out_h=int(1+(h+2*self.pad-fh)/self.stride)
+        out_w=int(1+(w+2*self.pad-fw)/self.stride)
+        
+        col=im2col(x,fh,fw,self.stride,self.pad)
+        col_w=self.w.reshape(fn,-1).T
+        out=np.dot(col,col_w)+self.b
+        
+        out=out.reshape(n,out_h,out_w,-1).transpose(0,3,1,2)
+
+        return out
+    
+    
+x1=np.random.rand(1,3,7,7) #데이터수,채널 수,높이,너비
+col1=im2col(x1,5,5,stride=1,pad=0) # ,, 필터 높이,너비,스트라이드,패딩
+print(col1.shape)
+
+x2=np.random.rand(10,3,7,7)
+col2=im2col(x2,5,5,stride=1,pad=0)
+print(col2.shape)
