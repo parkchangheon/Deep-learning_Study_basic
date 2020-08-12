@@ -1,0 +1,20 @@
+#slicing
+train_images=train_images.reshape((60000,28,28))
+
+
+my_slice=train_images[10:100]
+print(my_slice.shape)
+
+my_slice=train_images[10:100,:,:]
+print(my_slice.shape)
+
+my_slice=train_images[10:100,0:28,0:28]
+print(my_slice.shape)
+
+#이미지 오른쪽 아래 14*14 픽셀을 선택하고자 한다
+my_slice[:,14:,14:]
+
+#음수도 사용가능 예로 정중앙 14*14 픽셀 조각을 이미지에서 잘라 내려면
+my_slice[:,7:-7,7:-7]
+
+print("end")
