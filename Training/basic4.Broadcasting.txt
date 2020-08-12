@@ -1,0 +1,17 @@
+#x size=(32,10) y size=(10,)
+# broadcasting
+
+#y (10,)->(1,10)->*32 ->(32,10)
+
+def naive_add_matrix_and_vector(x,y):
+    assert len(x.shape)==2          #(32,10)
+    assert len(y.shape)==1          #(10,)
+    assert x.shape[1]==y.shape[0]   # 10
+    
+    x=x.copy()
+    
+    for i in range(x.shape[0]):
+        for j in range(y.shape[1]):
+            x[i,j]+=y[j]             # 덧셈
+            
+    return x
