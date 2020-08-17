@@ -1,0 +1,7 @@
+from keras import models
+from keras import layers
+
+model=models.Sequential()
+model.add(layers.Dense(16,activation='relu',input_shape=(10000,))) #16은닉 유닛을 가진 층
+model.add(layers.Dense(16,activation='relu'))                      #이런층을 두개 만들고, relu로 활성화 함수를 구현
+model.add(layers.Dense(1,activation='sigmoid'))                    # 마지막 출력은 확률로 표현 가능한 sigmoid 함수를 사용.
