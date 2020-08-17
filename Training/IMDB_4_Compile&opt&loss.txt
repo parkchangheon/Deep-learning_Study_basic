@@ -1,0 +1,24 @@
+#모델 컴파일 하기
+model.compile(optimizer='rmsprop',
+             loss='binary_crossentropy',
+             metrics=['accuracy'])
+
+#옵티마이저 설정
+
+
+from keras import optimizers
+
+model.compile(optimizer=optimizers.RMSprop(lr=0.001),  # 학습률 조정하면서 학급 lr 은 학습률
+             loss='binary_crossentropy',
+             metrics=['accuracy'])
+
+
+#손실과 측정을 함수 객체로 지정하기
+
+
+from keras import losses
+from keras import metrics
+
+model.compile(optimizer=optimizers.RMSprop(lr=0.001),
+             loss=losses.binary_crossentropy,          #위와 다를 것 없음
+             metrics=[metrics.binary_accuracy])
