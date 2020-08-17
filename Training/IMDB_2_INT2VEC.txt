@@ -1,0 +1,16 @@
+#정수 시퀀스를 이진행렬로 인코딩
+
+import numpy as np
+
+def vectorize_sequences(sequences,dimension=10000):
+    results=np.zeros((len(sequences),dimension))
+    for i,sequence in enumerate(sequences):
+        results[i,sequence]=1        #result[i]에서 특정 인덱스의 위치를 1로 만든다.
+    return results
+
+
+x_train=vectorize_sequences(train_data) #훈련 데이터->벡터
+x_test=vectorize_sequences(test_data)
+
+y_train=np.asarray(train_labels).astype('float32')
+y_test=np.asarray(test_labels).astype('float32')
