@@ -1,0 +1,23 @@
+import tensorflow as tf
+import keras
+
+from keras.datasets import imdb
+
+(train_data,train_labels),(test_data,test_labels)=imdb.load_data(num_words=10000) #가장 많이 쓰이는 단어 1만개를 쓰겠다.
+#train_data와 test_data는 인코딩 된 리스트 형태로 나올 것
+#labels는 0,1 로 나타나는 부정,긍정 리스트
+#train_data[0]은 단어 모음집...*10000 ;  예)train_data[0]=[1,14,22 .... 178,32]
+#train labels[0]이 train_data에 대한 정답.
+
+
+######위 인코딩된 형태를 단어로 변형시키겠다######
+
+word_index=imdb.get_word_index()  #word_index는 단어와 정수 인덱스를 매핑한 딕셔너리
+reverse_word_index=dict(
+[(value,key) for (key,value) in word_index.items() ])
+
+decoded_review=' '.join(
+[reverse_word_index.get(i-3,'?') for i in train_data[0]]) #.join은 리스트-> 문자열로 변경해줌.
+
+#리뷰를 디코딩한다. 0,1,2는 패딩,문서시작,사전에 없음을 위한 인덱스이므로 3을 뻄
+print(decoded_review)
