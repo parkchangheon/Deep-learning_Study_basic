@@ -1,0 +1,23 @@
+#검증
+
+#검증세트 준비
+x_val=x_train[:10000]
+partial_x_train=x_train[10000:]
+y_val=y_train[:10000]
+partial_y_train=y_train[10000:]
+
+
+#학습
+
+#모델을 512개의 샘플씩 미니패치를 만들어 20번의 에포크 동안 훈련
+
+model.compile(optimizer='rmsprop',
+             loss='binary_crossentropy',
+             metrics=['acc'])
+
+#만든 모델을 학습 시킬때는 fit을 사용
+history=model.fit(partial_x_train, #입력데이터
+                 partial_y_train,  #라벨 값
+                 epochs=20,        #학습 반복 횟수
+                 batch_size=512,   #몇개의 샘플로 가중치를 갱신 할 것인지... 예를들어 10이라면 전체 사이즈를 10 단위마다 갱신.
+                 validation_data=(x_val,y_val)) #앞의 검증 데이터
