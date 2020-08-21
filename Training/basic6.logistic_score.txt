@@ -1,0 +1,20 @@
+x=np.array([[70,85,11],[71,89,18],[50,80,20],[99,20,10],[50,10,10]])
+# 중간, 기말, 가산점 == 입력 벡터의 차원은 3. input_dim=3
+
+y=np.array([73,82,72,57,34])
+
+model=Sequential()
+model.add(Dense(1,input_dim=3,activation='linear'))
+sgd=optimizers.SGD(lr=0.00001)
+
+model.compile(optimizer=sgd,loss='mse',metrics=['mse'])
+
+model.fit(x,y,batch_size=1,epochs=200,shuffle=False)
+# 점점 loss가 줄어든다.
+print(model.predict(x))
+
+
+
+#학습x 된 데이터를 예측해본다
+x_test=np.array([[20,99,10],[40,50,20]])
+print(model.predict(x_test))
